@@ -2,7 +2,7 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\documentclass[a4paper, 12pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
 
 \usepackage[protrusion=true,expansion=true]{microtype} % Better typography
 \usepackage{graphicx} % Required for including pictures
@@ -60,7 +60,7 @@ maxnames=2
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{Jack Leland}
-\lhead{\textsc{Second Year Progress Report}}
+\lhead{\textsc{Third Year Progress Report}}
 \cfoot{\thepage}
 
 \makeatletter
@@ -107,8 +107,8 @@ maxnames=2
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Second Year Progress Report} \\
-		Particle-in-cell simulations of Langmuir probes and measurements in Magnum-PSI} % Subtitle
+\title{\textbf{Third Year Progress Report} \\
+		Measurements and particle-in-cell simulations of MAST-U flush-mounted Langmuir probes} % Subtitle
 
 \author{\textsc{Jack Leland} % Author
 	\\ {\textit{University of Liverpool, Brownlow Hill, Liverpool, L69 3GJ}}
@@ -135,13 +135,11 @@ Novel divertor configurations are being explored as a possible solution to the h
 Detailed knowledge of temperature and density in these divertors is therefore essential when testing the effectiveness of the heat mitigation provided by the configurations.
 850 Langmuir probes have been installed in the plasma facing components (PFCs) of MAST-U however their analysis will be complex owing to the challenges associated with the sensitivity of flush mounted probes to field line incidence angles. 
 Detailed 2 and 3 dimensional particle-in-cell simulations are being carried out, using the particle-in-cell code SPICE, of a variety of different Langmuir probe tip geometries.
-%which will allow for the reproduction of the probes in a prescribed plasma environment.
-By simulating the voltage sweep of a probe in a prescribed plasma environment, the measured current-voltage characteristic can be compared to the expected temperature and density and modifications to the current Langmuir probe theory made to account for field line angle effects.
-%This will lead to an improved model for the FMPs in MAST-U, and possibly a generalised improvement for any given Langmuir probe, which can be compared to the data taken during the upcoming physics campaign.
-An updated model will be applied to the interpretation of flush mounted Langmuir probe data from MAST-U.
-A further comparative dataset was taken on the linear plasma device Magnum-PSI in spring 2018, utilising a probe head from MAST-U's Divertor Science Facility.
-
-%This will hopefully provide useful benchmarking data and/or validation for the data to be taken on MAST-U, thus improving the diagnosis of the super-X divertor configuration. 
+By simulating the voltage sweep of a probe in a prescribed plasma environment, the measured current-voltage characteristic can be compared to the specified temperature and density. 
+Two experimental trips to Magnum-PSI in the Netherlands were also carried out to verify that the angled tip design, used on the probes in MAST-U, works at the grazing angles of incidence expected in the MAST-U divertor. 
+The data from these experiments and the simulations will be compared and used to make modifications to the current Langmuir probe theory to properly account for field line angle effects and 3D tip geometries.
+The updated model can then be applied to the interpretation of flush mounted Langmuir probe data from MAST-U.
+ 
 \end{abstract}
 
 %\hspace*{3,6mm}\textit{Keyswords:} lorem , ipsum , dolor , sit amet , lectus % Keywords
@@ -157,7 +155,7 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 \section{\label{sec:intro}Introduction}
 
 \subsection{\label{subsec:tokamaks}Tokamaks}
-	Fusion is an attractive candidate for base-load commercial energy production due to its lack of greenhouse gas emissions, high power output, abundant fuel and lack of long-lived radioactive waste.
+	Fusion is a potential candidate for base-load commercial energy production due to its lack of greenhouse gas emissions, high power output, abundant fuel and lack of long-lived radioactive waste.
 %	A Deuterium-Tritium (DT) fuel mixture must be heated to high enough temperatures to create collisions of sufficient energy to allow fusion to take place. 
 %	The equation for this reaction is:
 %	\begin{equation}
@@ -167,12 +165,12 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 %	The temperatures required ($\sim$ 200 eV for DT) will ionise the fuel mixture into a plasma, meaning that the individual charged components can be manipulated and confined by magnetic fields.
 	One of the methods proposed for confining the fusion reaction is the use of magnetic fields, known as magnetic confinement fusion (MCF).
 	This can be done using several techniques, the most widely used of which is the Tokamak; a toroidal magnetic device comprised of a combination of toroidal and poloidal magnetic fields in a helical shape. 
-	This setup is being developed with the aim of a sufficient confinement time to allow net energy to be extracted from the fusion reaction and delivered to the grid.  
+	This setup is being developed with the aim of confining the plasma for a long enough time to allow net energy to be extracted from the fusion reaction and delivered to the grid.  
 	
 \subsection{\label{subsec:exhaust}The Exhaust Problem and MAST-Upgrade}
 	A necessary consequence of the magnetic containment of a plasma within a vessel, such as a tokamak, is the existence of open field lines, i.e. field lines which impinge on surfaces. 
 	Particles orbiting along open field lines will therefore impact on these surfaces, meaning these field lines create an avenue for heat \& particles to flow out of the plasma and be deposited onto surfaces.
-	This can be helpful as it allows the removal of impurities - notably Helium ash, a by product of the Deuterium-Tritium (DT) fusion reaction - however it is usually necessary to physically separate the impinged surfaces from the core plasma to reduce the flow of sputtered impurities into the core. 
+	This can be helpful as it allows the removal of impurities - notably helium `ash', a by product of the Deuterium-tritium (DT) fusion reaction - however it is usually necessary to physically separate the impinged surfaces from the core plasma to reduce the opposing flow of sputtered impurities into the core which radiate away heat. 
 	This can be done with either a limiter or a divertor\cite{Wesson2011}, with modern devices almost exclusively using divertors because of (a) the reduced sputtering of impurities into the core, and (b) access to H-mode - a mode of operation with higher confinement of particles in the core \cite{Itoh1989}.
 	
 %	  usually done with use of a divertor (\cref{fig:divertor}), where the targets are separated from the core plasma by a magnetic null point, or X-point.
@@ -180,21 +178,21 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 %	These strike points will experience the highest heat and particle fluxes from the core plasma as particles cross the separatrix and flow towards the target through the scrape-off layer.
 %	
 %	Divertors have been used for decades with great success, allowing for more stable plasmas to be created. 
-	However, when scaling Tokamaks up in size in order to produce a significant quantity of fusion reactions, the divertor target plates will experience very high heat fluxes because of the high core temperature required.  
+	However, when scaling Tokamaks to the size required for commercial electricity generation, the divertor target plates will experience very high heat fluxes because of the high core temperature required.  
 	Dealing with and mitigating these heat fluxes is one of the key challenges currently standing in the way of commercial fusion power for toroidal devices\cite{Romanelli2012}. 	 
 	
 %\subsection{\label{subsec:mast}MAST-Upgrade}
-	\begin{wrapfigure}[17]{rt}{8cm}
+	\begin{wrapfigure}[17]{rt}{6cm}
 		\centering
 		\vspace{-10pt}
 		\includegraphics[width=1.0\linewidth]{IllustrativeFigures/divertor.jpg}
-		\caption{\label{fig:divertor}A diagram of the regions within a tokamak plasma, including the separatrix - the line separating the closed and open field lines - and the divertor, separated from the core plasma by the X-point.}
+		\caption{\label{fig:divertor}A diagram of the regions within a tokamak plasma, including the separatrix and the divertor, separated from the core plasma by the X-point.}
 	\end{wrapfigure}
 	A proposed mitigation technique for the heat exhaust problem is the use of divertor configurations which allow for reduced heat flux to plasma facing components (PFCs). 
 	MAST-Upgrade (MAST-U) at CCFE has been designed as an experiment to test several aspects of divertor physics, namely the use of a closed divertor with Super-X capability \cite{Valanju2009}.
 	The closed aspect of the divertor means that it is separated from the main chamber by a baffle, and therefore more effective at restricting the flow of impurities and neutrals into the core, improving confinement. 
 	The higher neutral pressure in the closed divertor also enhances the amount of energy loss via radiation, dissipating the power hitting the target plates.
-	The Super-X configuration reduces heat flux further by extending the plasma out radially, increasing both the size of the strike point, so the same power is spread over a wider area, and the flight time of particles in the divertor, allowing them to lose energy over a longer period of time.
+	The Super-X configuration reduces heat flux further by extending the plasma out radially, increasing both the size of the strike point, so the same power is spread over a wider area; and the flight time of particles in the divertor, allowing them to lose energy over a longer period of time.
 %	Lower neutral pressure in the core results in higher confinement and easier access to H-mode.
 %	A detached plasma should also be easier to access, which involves having an increased neutral density in the divertor which increases radiation of energy from the plasma before it hits the target.
 %	\begin{wrapfigure}[16]{rt}{7cm}
@@ -220,14 +218,10 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 	At grazing angles of incidence, routinely found in tokamaks, sheath expansion becomes a dominant factor in the determination of the effective collection area ($A_{eff}$) of the probe \cite{Bergmann1994}. 
 	Small uncertainties in the angle can therefore have large effects on the amount of sheath expansion experienced by the probe and therefore the shape of the IV characteristic.
 	On top of this, magnetised probe theory is only valid when the projected probe extent is greater than the local Debye length and Larmor radius \cite{Gunn1995}. 
-	The form of the IV characteristic, taking these effects into account, was developed by Bergmann\cite{Bergmann2002} and is as follows:
+	The form of the IV characteristic, taking these effects into account, was developed by Bergmann \cite{Bergmann2002} and is as follows:
 	\begin{equation}
 	\label{eq:ivcurvesheathexp}
-	\frac{I}{I_{i,sat}} =  1 + a |V|^{\frac{3}{4}} - \exp\left({-V}\right)  
-	\end{equation}
-	with
-	\begin{equation}
-	V = \bigg(\frac{e(V_p - V_f)}{k_B T_e}\bigg)
+	\frac{I}{I_{i,sat}} =  1 + a |V|^{\frac{3}{4}} - \exp\left({-V}\right) \qquad \textnormal{with} \qquad  V = \bigg(\frac{e(V_p - V_f)}{k_B T_e}\bigg)
 	\end{equation}
 	where $I$ is the measured current, $I_{i,sat}$ is the ion saturation current, $V_p$ and $V_f$ are the probe and floating potentials respectively, $e$ is the charge on an electron and $k_B$ is the Boltzmann constant. 
 	Bergmann's, and later Murphy-Sugrue's \cite{Murphy-Sugrue2017}, contribution to this equation is the addition of a sheath expansion term, $a$, which takes into account the incidence angle of the magnetic field $\theta$. 
@@ -239,144 +233,63 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 	where $c_1$ and $c_2$ are coefficients of the lateral and frontal expansion of the sheath respectively, $\lambda_D$ is the Debye length of the plasma, $L$ is the length of the probe and $g$ is the size of the gaps either side of the probe.
 	
 	These issues have been previously mitigated on JET\cite{Monk1996} and DIII-D by angling the probe tip with respect to the incident magnetic field to increase the projected probe area and therefore lower the dependence on small changes of angle. 
-	A similar probe tip has been designed for use in the divertor of the MAST-U tokamak at CCFE \cite{Harrison}.
+	A similar probe tip has been designed for use in the divertor of the MAST-U tokamak at CCFE \cite{Harrison}, with 850 probes of this type installed throughout the PFCs.
 	
 \subsection{\label{subsec:motivation}PhD Project}
-	As the area of the probe is essential to the calculation of the current density of the flux tube, getting measurements of $n_e$ becomes highly dependent on knowing the incidence angle and using this to calculate the area of the probe.
+	As the collection area of the probe is essential to the calculation of the current density of the flux tube, getting measurements of $n_e$ becomes highly dependent on knowing the incidence angle and using this to calculate the area of the probe.
 	This is also true for $T_e$, but to a lesser extent, as this is more dependent on orbits than small changes in collection area. 
 	The main aim of this PhD project is to simulate the FMPs that will be used in the PFCs of MAST-U, using a 2D/3D3V particle-in-cell (PIC) simulation code called SPICE \cite{Komm2011, Komm2013}. 
-	These simulations are currently being run on the CUMULUS supercomputing cluster located at CCFE.
-	Time has also been requested on the MARCONI supercomputing cluster hosted by Eurofusion\cite{Voitsekhovitch2018} to have an option of improved scalability.
-	This is done with the aim of better understanding the IV curves produced in a wide range of conditions and therefore allow improvements to be made to the analysis model for MAST-U experimental data.
-	Simulation results will also allow improvements to the current model of FMP analysis by extending the models into 3-dimensions - as advancements in supercomputing now allow for efficient computation of complex problems.
-	This will allow for a more rigorous treatment of the probe tip geometry to be found than that found in \cref{eq:sheathexpparam} and therefore aid in generalising the analysis of FMPs.
+	These simulations are currently being run on the CUMULUS supercomputing cluster located at CCFE, and the MARCONI supercomputing cluster hosted by Eurofusion\cite{Voitsekhovitch2018} which boasts  improved scalability over CUMULUS.
+	These simulations are done with the aim of better understanding the IV curves produced in a wide range of conditions to therefore allow improvements to be made to the analysis model for MAST-U experimental data.
+	Simulation results will also facilitate improvements to be made to the current model of FMP analysis by extending the models into 3-dimensions - as advancements in supercomputing now allow for efficient computation of the complex physics happening around a probe tip.
+	This will allow for a more rigorous treatment of the probe tip geometry to be formulated than that found in \cref{eq:sheathexpparam} and therefore aid in generalising the analysis of FMPs.
 
 %------------------------------------------------------------------------------------
 %	Langmuir Probes
 %------------------------------------------------------------------------------------
 
 \section{\label{sec:lpsims}Simulations of Langmuir Probes}
-	
-\subsection{\label{subsec:benchmark}Benchmarking Murphy-Sugrue}
-	The initial stages of the project called for familiarisation with SPICE and its benchmarking against previous simulations of FMPs done on the 2D3V code VSIM by Murphy-Sugrue \cite{Murphy-Sugrue2017a}.
-	
-	\begin{wrapfigure}[22]{lt}{8cm}
-		
-		\vspace{-10pt}
-		\centering
-		\includegraphics[width=1.0\linewidth]{PRYear2/probegeometry.png}
-		
-		\caption{
-			\label{fig:simulationmodel}Diagram of the simulation geometry used by 	Murphy-Sugrue in 2D simulations of a flush mounted probe. 
-			The left and right sides of this window are periodic, and the particle source is across the top of the domain. 
-			The pink regions approximately indicate where velocity distributions were sampled from in \cref{subsec:injection} and the arrow indicates the direction of the Magnetic field in relation to the probe.
-		}
-		\vspace{-20pt}
-	\end{wrapfigure}
-	My 1st year progress report describes that benchmarking simulations had been carried out of a 2D probe in the same geometry used in the bulk of \cite{Murphy-Sugrue2017a}: a flush mounted rectangular probe with small gaps either side (see \cref{fig:simulationmodel}, or my 1st year progress report for more detailed simulation parameters).
-%	These had periodic boundary conditions on the left and right and a particle source across the top of the domain. 
-%	The particle source is coded in such a way as to reinject particles leaving the domain to not disturb the temperature of the plasma.
-%	The domain is simulated with parameters $T_e = T_i = 6eV$, $n_e = 6.85 \times 10^{18}$, $B = 0.413$T and $\alpha = 12.566$, where $B$ is magnetic field strength and $\alpha$ is incidence angle, in two cases; one with no-gap as in the simulations by \cite{Bergmann2002}, and one with gaps either side of the probe as in the simulations by Murphy-Sugrue \cite{Murphy-Sugrue2017a}. 
-%	The `with gap' simulations have 0.48mm gaps either side of the probe, where the probe length is 2.38mm. 
-%	The ion-electron mass ratio ($\mu$) is 900, there were 20 particles per cell and the domain is 822 x 372 $\lambda_D$ in size. 
-%	Each cell is a square of $0.5 \lambda_D$.
 
-	The probe was swept in voltage after 2 simulation cycles, which in SPICE are defined by the window traversal time for an ion.
+\subsection{\label{ssec:sim_setup}General Simulation Setup}
+	All simulations referred to in the following section were 2-dimensional particle-in-cell simulations of the plasma around a probe tip.
+	The simulations all had periodic boundary conditions on the left and right and a particle source across the top of the domain. 
+	The particle source is coded in such a way as to reinject particles leaving the domain to not disturb the temperature of the plasma.
+	The plasma was allowed to come to a steady state - designated as 2 simulation cycles, which in SPICE are defined by the window traversal time for an ion - and then a voltage sweep is performed from -220V to 220V to pre-designated probe objects in the simulation window. 
 	Current is measured as the voltage is swept, allowing an IV characteristic to be extracted.
-	This IV characteristic was then fit with \cref{eq:ivcurvesheathexp}, performed using the least squares fitting function curve\_fit() (part of the optimise package in numpy). 
-	The parameters extracted ($T_e, n_e, a, I_{i, sat}$) are the plasma parameters measured by a perfectly conducting probe with no capacitance effects.
-	
-	As previously reported, the comparison of gapped and non-gapped probes yielded the same overall conclusion of higher saturation current seen by the gapped probe. 
-	This matches expectations as it has a higher collection area due to the additional edge exposed to the incident magnetic field, meaning a larger flux tube is subtended by the probe.
-	However, the temperatures measured by the probe were anomalous, coming in $\sim20\%$ lower than the temperature specified in the input file. 
-	This was thought to be because of a change in temperature across the simulation window, as seen by Murphy-Sugrue due to the loss of the high energy tail from the distribution function of the plasma not being replaced quickly enough by the injection algorithm.
-	
-\subsection{\label{subsec:injection}Velocity Distributions}
-	An investigation was thus carried out into how the velocity distribution changed across the simulation window. 
-	This was done through the manual creation of velocity histograms by binning all particles' velocity components parallel to the magnetic field. 
-%	Components of velocity were taken parallel to the magnetic field.
-%	There do exist built-in SPICE diagnostics for extracting velocity distributions but these were found to be inadequate for the measuring of temperatures due to a low particle count introducing lots of noise.
-	Once histograms were compiled, velocities were denormalised into SI units and then fit with a Gaussian velocity distribution of the form:
+	This IV characteristic can then be fit with \cref{eq:ivcurvesheathexp}, performed using the non-linear least squares fitting function curve\_fit() (part of the optimise package in numpy).
+	The parameters extracted by this fit ($T_e, n_e, a, I_{i, sat}$) represent the plasma parameters measured by a perfectly conducting probe with no capacitance effects. 
+	Note that this analysis has been generalised (\hyperlink{https://github.com/jackleland/flopter}{see github}) and was also applied to the data from experimental probes in \cref{sec:magnumprobes}.
 
-	\begin{equation}
-	\label{eq:gaussiandist}
-%	np.sqrt(a / np.pi) * np.exp(-(a) * np.power(v - v_0, 2))
-%	a = self.mass / (2 * self.temp_conversion * T_e)
-		f(v) = \sqrt{\frac{\alpha}{\pi}} \exp{\left( -\alpha(v - v_0)^2\right) } \quad\textnormal{where}\quad \alpha = \sqrt{\frac{m_e}{2 k_B T_e}}
-	\end{equation}
-	where $f(v)$ is the one dimensional Gaussian velocity distribution function, $v$ is the velocity of a given particle, $v_0$ is the mean velocity of the plasma in the sampling region and $m_e$ is the mass of an electron.
-	$T_e$ and $v_0$ were the parameters set to freely vary in the fit.
+\subsection{\label{ssec:marconi}Move to Marconi and 24-hour Time Limits}
+    Following the benchmarking period on CUMULUS in 2018, time was applied for in the 2019-2020 allocation on Marconi. 
+    This application was successful, with $\sim10^{7}$ core-hours allocated, so work was started in January of 2019 to get Spice-2 simulations working on Marconi.
+    This was unfortunately dogged by months of hardware problems on Marconi and then issues with running Spice-2 in the 24 hour time limit imposed by Marconi.
+    
+    This 24 hour time limit is in place to encourage high parallelisability of code, but Spice-2 is unfortunately limited by its solver which, while recently parallelised, offers limited scalability - peaking at around 100 cores.
+    % The code is also very memory intensive, which is the main bottleneck.
+    This means that most Spice-2 simulations, dependent principally on density and the incidence angle of the magnetic field, will take over 24 hours, and often many times more than this. 
+    Therefore the simulations must be continually restarted in order finish when using on Marconi. 
+    Unfortunately the current version of Spice-2 is unable to effectively restart while maintaining a measure of the current to a simulated probe. 
+    This is a recognised bug, but as the support team for Spice-2 is small, and I am the only user who needs this feature to work, the resolution has yet to be found or implemented.
+    This is however ongoing and a workaround has been found which allows new simulations to be joined together and now allows longer simulations involving probes to be effectively analysed. 
+    
+    A new python package has also been produced to assist in submitting many 24 hour Spice-2 simulations.
+    This package can automatically submit jobs on a cluster with batch job submission and have them automatically restart until a certain time limit is made. 
+    This package can also submit parameter scans, i.e. it can read an input file with $n$ values for a particular parameter and submit one job for each parameter. 
+    There is also automatic logging functionality to keep track of the simulations submitted along with their parameters and machine/job information. 
+    This package is currently only functional for Spice-2 and Spice-3, but has been written to be code agnostic and work is underway to make it a general, open-source tool. 
+    More details can be found on the \hyperlink{https://github.com/jackleland/autospice/tree/development}{github}.
 	
-	\begin{wrapfigure}[20]{rh}{10cm}
-		
-		\vspace{-15pt}
-		\centering
-		\includegraphics[width=1.0\linewidth]{AllDataFigures/SpiceSimulations/Tests/distributionChange.png}
-		
-		\caption{\label{fig:distChange}Graph of the velocity distribution function of the electrons in the simulated plasma at 4 different locations: by the sheath entrance, at the injection area, and two points in between. The temperature, seen as the width of these Gaussian velocity distributions, decreases between injection and the sheath edge, which could account for the anomalously low temperature measured by the simulated probe.}
-		\vspace{-10pt}
-	\end{wrapfigure}
-	Temperatures were measured from 4 equally spaced regions of the plasma in front of the probe: at the injection region, at the sheath entrance and two regions between (see \cref{fig:simulationmodel}).
-	The distribution functions measured in each region (\cref{fig:distChange}) showed an increase in the flow velocity as the particles approached the sheath, which is to be expected, and a decrease in temperature by approximately $\sim 0.8$. 
-	This explains the spurious measured temperatures from the benchmarking simulations of the probe as the assumption that the temperature of the plasma is uniform across the simulation window does not hold. 
-	According to Langmuir probe theory \cite{Hutchinson2002}, the probe is sampling the temperature of the plasma at the sheath entrance. 
-	Therefore in the analysis of all subsequent simulations the temperature at the sheath entrance - extracted from the fit to the histogram in this region - was used as the basis for comparison for the probe measurements, i.e. the probe temperature measurements were divided by the ratio between the fitted temperature at the injection region and the sheath entrance region ($\upsilon$)
-	This does mean that the temperature seen by the probe is different from the temperature specified in the input file (by a factor of $\upsilon$), with profiling needed to be done to establish the exact relationship between these two temperatures if the probe temperature is to be specified in future simulations.
-
-\subsection{\label{subsec:spicedevel}Spice Development}
-	Following the investigation of velocity distributions, several changes were made to the SPICE source code to investigate further anomalous phenomena that occurred during simulations. 
-	
-	The first change made was to collect the velocities assigned to new particles by the injection algorithm and investigate whether any changes were being made by the source code before the particles were added to the simulation. 
-	SPICE is purported to inject particles by sampling from pre-determined Maxwellian distributions, specified by the ratio of ion to electron temperatures ($\tau$).
-	Phase selection is done carefully so as to ensure that particles aren't immediately removed from the simulation window by travelling across the top boundary through their Larmor orbits.
-	This modification was done to ensure that the underlying injection velocity distribution function was as expected before any of the particles interacted with the potential in the simulation window.
-	\begin{wrapfigure}[15]{lh}{10cm}
-		
-		\vspace{-10pt}
-		\centering
-		\includegraphics[width=1.0\linewidth]{AllDataFigures/SpiceSimulations/SamBenchmarking/FullGrid/Gap/PotentialResized.png}
-		
-		\caption{\label{fig:potentialstructures}Graph of the electrostatic potential around the flush mounted probe at the final time-step of the simulation. This is notable for the structures of large positive potential around the probe, which are anomalous and being investigated.}
-		\vspace{-10pt}
-	\end{wrapfigure}
-	The source code was therefore edited to write the velocities of all injected particles to file in the first 100 time steps before they were added to the simulation.
-	No significant changes from the specified Maxwellian were found.
-	
-	The second change was more substantial, and involved the extraction of simulation window parameters, notably electrostatic potential, at a number of points throughout the simulation.
-	This was motivated by the observation of strange potential structures when looking at the potential of the simulation window taken at the end of the probe voltage sweep. 
-	It is known that SPICE becomes unstable when the probe is strongly positively biased, so it was hypothesised that these structures (\cref{fig:potentialstructures}) were a product of this numerical instability. 
-%	As SPICE is only able to output simulation window parameters for the final time-step, 
-	In order to look at the potential structure around the probe at other points in the simulation than the final timestep, modifications to the code were required and have now been made.
-	The analysis of the extracted data is still ongoing.
-	
-	Future plans for the development of SPICE during this PhD include porting these changes over to the SPICE-3 (the 3-dimensional (3D) version of the code), and also developing the code so that bespoke voltage waveforms can be used instead of just a linear sweep in bias voltage.
-	
-\subsection{\label{subsec:simscale}Simulation Scaling}
-	In order to provide comparative simulations to the work done in \cref{sec:magnumprobes}, larger simulations of the entire probe tip were attempted in 2D. 
-	However problems were encountered when trying to scale the simulation to the sizes required.
-	The simulation can theoretically be scaled up to any size, but the time for the simulation will grow with the square of the scale factor\cite{Birdsall2005}.
-	It is therefore necessary to find ways to either speed up the simulation or to parallelise the simulation further and reduce the wall-clock time.
-	A bug in the version of MPI recommended for use with SPICE-2 was found to be limiting the parallelisability to 32 cores, which was fixed by upgrading MPI to a newer version.
-%	One of the problems encountered with the latter solution was a bug with the version of MPI recommended for use with SPICE which did not allow for the splitting of computation over more than one node - limiting parallelisation to 32 cores. 
-%	This was eventually fixed by upgrading the version of MPI to one which SPICE is not recommended to run with, and allowed the splitting of SPICE over 64 cores across 2 nodes - the most that SPICE2 is able to effectively parallelise.
-	
-	The other problem encountered was more fundamental; namely due to the way SPICE is normalised.
-	As mentioned by Muphy-Sugrue\cite{Murphy-Sugrue2017a}, the accepted method of speeding up a Langmuir probe simulation is to change the length of the probe so it is shorter, but to simultaneously reduce the Larmor orbit radius ($\rho_{L,i}$).
-	This has the effect of reducing the computation time since the simulation window is smaller, but maintains the same physics as the ratio between $\rho_{L,i}$ and $L$ is kept the same. 
-	The reduction in $\rho_{L,i}$ is achieved by reducing the mass of the ions in the simulation, but this must be done in tandem with reducing $\lambda_D$, by raising the density of the plasma, so the ratio between $\rho_{L,i}$ and $\lambda_D$ is also conserved.
-	The problem with implementing this method in SPICE is twofold: (a) the simulation is normalised to $\xi = \frac{\rho_{L,i}}{\lambda_D}$, so if the Larmor orbit is reduced in size, the subsequent change in $\lambda_D$ leaves $\xi$ the same and therefore SPICE runs the same simulation. 
-	$L$ is also specified in units of $\lambda_D$ so the reduction in $\lambda_D$ counteracts any change in $L$, leaving the simulation exactly the same, except for the ratio of $m_i$ to $m_e$ ($\mu$).
-	
-	The second problem is that the ion mass cannot in fact be reduced, as changing $\mu$ in a SPICE input file increases $m_e$, thereby increasing the electron Larmor radius. 
-%	This is done to 
-	This was confirmed through a series of simulations utilising the SPICE particle tracking diagnostic and different methods of trying to reduce $m_i$. 
-	Results from these simulations revealed that the ion Larmor orbit size did not change with different values of $\mu$.
-	Other methods for running the simulations of interest within reasonable time frames are currently being explored.
+\subsection{\label{subsec:mastu_probe_design} Progression of MAST-U Probe Design}
+	Owing to the limitations on running probe simulations before a workaround was found, only lower density simulations could be performed as density is the main scaling factor for the length of a Spice simulation.
+	This is explained by the findings in my previous yearly report that length-scalability of the code was primarily controlled by density, so lowering density to $1 \times 10^{18} m^{-3}$ for a simulation with an incidence angle of $10^{\circ}$ resulted in a 10 hour completion time. 
+	This completion time would be higher for the lower angles of magnetic field incidence angle, as the length of the simulation scales with $\frac{1}{\sin{\theta}}$. 
+	A study of the probe design of MAST-U was carried out in 2 dimensions to bridge the gap between the previously run benchmarking simulations of 
 
 %\subsection{\label{subsec:mpiissues}MPI Issues}
 
 %------------------------------------------------------------------------------------
-%	PIC
+%	Magnum Measurements
 %------------------------------------------------------------------------------------
 
 \section{\label{sec:magnumprobes}Probe Measurements at Magnum-PSI}
@@ -410,12 +323,12 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 	The probe head used in this experiment was a 4-probe array designed for use in the DSF at MAST-U: a sample testing facility installed within the MAST-U divertor which facilitates the exchange of samples or electrical probes while maintaining vessel vacuum \cite{Elmore2012}.
 	 
 	This probe head has 4 Langmuir probes with tips of different geometry: a standard MAST-U tip, a tip with twice the geometric area of a MAST-U tip, a tip with half the area of a MAST-U tip, and a flush cylindrical probe with similar area to the standard probe. 
-	(For reference these will be labelled M, B, S, and R respectively, taken from their designation in the Magnum beam-hall). 
+	(For reference these will be labelled L, B, S, and R respectively, taken from their designation in the Magnum beam-hall). 
 	The first 3 probes are right-trapezoidal in geometry (\cref{fig:dsfprobe}) with the surface of the trapezium angled 10$^{\circ}$ relative to the divertor tile it is recessed into.
 
-	The four probes are electrically isolated from each other by a PEEK pin holder, and the leading edges of the probes shadowed from plasma exposure by a graphite shell around the whole assembly. 
+	The four probes are electrically isolated from each other by a ceramic pin holder - changed following the previous experiments findings that PEEK was not a suitable material - and the leading edges of the probes shadowed from plasma exposure by a graphite shell around the whole assembly. 
 	The distances between the probes and the graphite shell were chosen such that the probe's leading edges are shadowed at incidence angles up to 10$^{\circ}$, the average expected operating regime of MAST-U in Super-X configuration \cite{Harrison}.	
-	A specialised mounting assembly was designed and manufactured to hold the DSF probe head in place against the Magnum flat target holder (see \cref{fig:dsfprobe}).
+	The same specialised mounting assembly which was designed and manufactured for the previous experiment was used again to hold the DSF probe head in place against the Magnum flat target holder (see \cref{fig:dsfprobe}).
 	This target holder is water cooled and could tilt to give a range of magnetic incidence angles onto the probes.
 %	The voltage sweep on the probes was produced by an Agilent 3312A arbitrary function generator, the waveform used was a 20Hz triangle wave varying between -100 and +10 V. 
 %	This was amplified by a KEPCO 100-4M 100V bipolar operational power supply and applied to two of the four probes at a time. 
@@ -424,7 +337,7 @@ A further comparative dataset was taken on the linear plasma device Magnum-PSI i
 %	The digitiser sampled at a minimum rate of 100kHz.
 	
 	The probes were prepared by vacuum bake at 200$^{\circ}$C for 5 hours, to minimise outgassing. 
-	They were exposed to Hydrogen plasmas with a range of temperatures and densities, attempting to replicate the conditions within the MAST-U divertor.
+	They were exposed to hydrogen plasmas with a range of temperatures and densities, attempting to replicate the conditions within the MAST-U divertor.
 	Due to the limitations of the source \cite{DeTemmerman2015a}, the temperatures could not be pushed higher than 3eV while maintaining low enough heat fluxes to prevent secondary electron emission from the LPs\cite{Stangeby2000}. 
 	Densities were possible in a range from 2 $\times 10^{19}$ to 2.5 $\times 10^{20}$ m$^{-3}$.
 	The angle was varied in all cases between 0 and 10$^{\circ}$, which is the range of angles which are predicted to create challenges for probe interpretation in MAST-U.
