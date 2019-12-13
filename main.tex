@@ -323,7 +323,7 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 	    \item Temperatures in a range from 1.5eV to 9.5eV.
 	    \item Magnetic field strength from 0.5T to 1.5T
 	\end{itemize}
-	Note that the magnetic field strength on MAST-U will be limited to 0.8T, but the previous experiments showed that this did not allow temperatures above 5eV to be created on Magnum, so this requirement was relaxed.
+	Note that the magnetic field strength on MAST-U will be limited to 0.8T, but the previous experiments showed that this did not allow plasmas with $T_e$ above 5eV to be created on Magnum, so this requirement was relaxed.
 	A neutral density scan was also performed, as a benchmark to previous measurements, by increasing pressure in the target chamber with hydrogen gas puffing at the target location.
 	As per the previous experiment, the plasma was also diagnosed with the well characterised \cite{} Thomson scattering (TS) system in almost all shots.
 	The infra-red camera and optical emission spectroscopy measurements were unable to be used in this set of experiments because of the alternative probe orientation chosen - the array was positioned parallel to the TS laser. 
@@ -390,6 +390,8 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 % 	These measurements were taken at an incidence angle of 10$^{\circ}$.
 % 	The half area probe (S) is used in all measurements discussed as it was approximately in the centre of the plasma beam and did not short during the experiment.
 % 	A low-pass Butterworth filter with a critical frequency of 4kHz was applied to the voltage signal to remove high frequency noise.
+    The IV characteristics themselves were sweep-averaged over the course of a `shot', which was taken to be the point between the raising and lowering of the beam dump where the probes were exposed to steady state plasma. 
+    Arcing was rare, but any instances of sharp increase in current or voltage were assumed to be an arc and filtered out. 
 	
 	IV characteristics were analysed using the 3-stage method developed on MAST \cref{fig:threeStageFit}, with a full 4-parameter model used throughout (\cref{eq:ivcurvesheathexp}) - parameters being $T_e$, $I_{sat}$, $V_f$ and $a$.
 	The ion saturation region of the IV curve is fit first to get an initial value for ion saturation current.
@@ -421,67 +423,36 @@ The updated model can then be applied to the interpretation of flush mounted Lan
     \end{equation}
 	$c_s$ is calculated from $c_s = \sqrt{\frac{e(T_e + T_i)}{m_i}}$ and $T_e = T_i$ assumed. 
 	
-	The IV characteristics themselves were sweep-averaged over the course of a 'shot', which was taken to be the point between the raising and lowering of the beam dump where the probes were exposed to steady state plasma. 
-	
-% 	\begin{figure}[t!]
-% 		\center{
+	The data set gathered is large, so the initial focus of analysis was on ensuring the calibration of the probes was done correctly using the improved characterisation and calibration shots on resistors of known resistance. 
+	The first set of shots to be analysed was the axial scan - a series of measurements taken with the S and L probes at different positions on the beam relative to the fixed position of the TS laser. 
+	These were all taken at an incidence angle of 10$^{\circ}$, with source input parameters (source current and gas flow) kept constant throughout. 
+	As the axial position scan necessitated moving the probe head, mount and TEAC arm through the TS laser position, only a single reference TS measurement was taken to which all probe measurements were compared (see \cref{fig:mag-axial-scan})
+	\begin{figure}[!tb]
+		\center{
 % 			\vspace{-20pt}
-% 			\subfloat[]{\label{fig:densityScan_Tn}\includegraphics[width=0.49\linewidth]{CollabReport/densityScan_TeNe_TS.png}}
-% 			\subfloat[]{\label{fig:densityScan_jq}\includegraphics[width=0.51\linewidth]{CollabReport/densityScan_jsatQpar_TS.png}}
-% 		}
-% 		\vspace{-5pt}
-% 		\caption{
-% 			(a) Graph of measured $T_e$ and $n_e$ from DSF 'S' probe and TS system as a function of target chamber pressure. 
-% 			The 'cutoff' listed above is the point at which pump speed reduction was stopped and gas puffing began. 
-% 			%			Note the peak in the TS density profile, which may indicate the existence of a detachment front moving along the beam from the probes to the TS system.
-% 			(b) Graph of $J_{sat}$ \textit{(upper)} and $q_{\parallel}$ \textit{(lower)} calculated from probe measurements and TS data as a function of gas puffing speed.
-% 		}
-% 		\vspace{-15pt}
-% 	\end{figure}
+			\includegraphics[width=1.0\linewidth]{axial_scan_2.png}
+		}
+		\vspace{-20pt}
+		\caption{
+			Graph showing the $T_e$ (top) and $n_e$ (bottom) measured by the S and L DSF probes (right), alongside the reference TS profile measurement, taken at a location of 200mm from TS (left).
+			Temperatures are still being overestimated by a factor of $\sim$1.6, which is an improvement over the previous factor of 4. 
+			}
+		\label{fig:mag-axial-scan}
+		\vspace{-10pt}
+	\end{figure}
+	The $T_e$ and $n_e$ measurements on the S probe show a rise in temperature and a drop in density as the probes are moved along the beam closer to the source. 
+	It was first thought that, due to the S probe being the most central and therefore closest to the peak $T_e$ and $n_e$, this drop in density closer to the source was the beam profile narrowing closer to the source. 
+	Upon re-examination of the properties of the beam however, the plasma should be well confined along the whole range of linear positions measured at, so the explanation is more likely to be that the TEAC arm, which is holding the probes and pushing them into position, does not perfectly align down the centre of the plasma beam. 
+	Therefore this axial profile measurement gives a good measure of the radial movement of the probes with axial distance. 
+	The temperature could still be expected to drop along the beam axis due to radiative processes removing energy from the system. 
+	The absolute values of the $T_e$ and $n_e$ measurements is over and underestimating compared to the TS measurement for temperature and density respectively. 
+	The temperature is being overestimated by a factor of $\sim$1.6, which an improvement over the previous factor of $\sim$4 but still leaves improvements to be made either in greater understanding of the physical picture or reassessment of the calibration. 
+	It should also be noted that the temperature, as measured by the TS system, is still under 5eV and so not ideal for measurement with LPs.
+	The density underestimation, by a factor of up to $\sim$6, has no clear explanation. 
+	It could be due: to an error in the calculation of the probe's collection area; an incorrect assumption of ion-electron temperature equivalence in the calculation of the sound speed, although Collective TS measurements taken recently on Magnum-PSI indicate this is unlikely; or, as for the temperature, some unaccounted for physics or incorrect calibration.
+	The jump in density at linear position 25mm is likely a sudden change in plasma parameters caused by some physical change within the source - it is unfortunately impossible to verify this however due to the necessary absence of TS coverage throughout the scan.
 	
-% 	When comparing results from the LPs with $T_e$ and $n_e$ measured by the TS system, a systematic overestimation of temperature was found by the LPs along with systematic underestimation of density.
-% 	Analytical IV characteristics were created from the TS data (\cref{fig:ivComparison}) approximating $V_f \sim 3 T_e$\cite{Stangeby2000} and calculating $a$ from \cref{eq:sheathexpparam}, substituting in Murphy-Sugrues values for the constants $c_1$ and $c_2$ (although this made little difference to the overall shape of the IV as $a$ was very small in most cases).
-	
-% 	The density difference could be explained by a decreasing density profile along the magnetic axis of the beam between the TS laser and the probes, which is unfortunately difficult to verify as there is little available data about the axial profiles of density and temperature on Magnum-PSI due to the static nature of the available diagnostics.
-% 	Preliminary analysis of the probe measurements taken in the 5 second traversal time either side of the stationary measurement window found there to be an increase of density as the probes moved into position, but further analysis would be required to draw conclusions about the exact nature of this profile.
-% 	The temperature difference does not have a clear explanation, as great care was taken to ensure the 4-parameter fit was as good as possible - achieved by ensuring errors were not overestimated through reduced $\chi^2$ goodness-of-fit testing and optimising the range of fitted data in voltage-current space.
-% %	Potential explanations of this finding could be found by challenging underlying assumptions: notably the electron-ion temperature equivalence which is at the core of Langmuir probe theory.
-% 	The best current explanation is that the TS beam was not aligned properly down the centre of the plasma beam and was therefore providing an off-axis temperature reading, i.e. not measuring through the hottest section of the beam.
-% 	Langmuir probes are however documented as being difficult to use on plasmas at temperatures on the order of a few eV\cite{Stangeby2000}, especially in noisy environments like tokamaks and linear devices, and this could be an explanation for the disparity of the temperature measurement.
-%	Magnum-PSI is in the process of implementing a collective Thomson scattering (CTS) system which could, when working, provide a measurement of $T_i$ and validate the former point. 
-%	The latter point is more difficult to validate, and would require greater plasma diagnosis closer to the FMPs (e.g. closer TS measurements).
-%	It could also be the case that the temperature measurement is in fact correct due to some as-yet unknown plasma physics happening between the probes and the TS laser.
-	
-% 	Analysis of the density scan was conducted using the measured temperatures and densities and comparing their profiles to those measured by the TS system. 
-% 	Saturation current density ($J_{sat}$) and parallel heat flux ($q_{\parallel}$) were also measured, with the latter using a value for the sheath heat transfer coefficient ($\gamma$) as 7.
-%	Results show a continually decreasing temperature and density profile seen by the probes, as expected, but a roll-over in the TS density profile (\cref{fig:densityScan_Tn}). 
-%	This rollover, along with the difference in position of the diagnostics, may indicate the movement of a detachment front up the beam as gas puffing is increased.
-%	An explanation could be that as more gas is pumped into the chamber the plasma closer to the probes is more readily detached, causing the initial plasma density drop off seen by the probes. 
-%	%	potentially because of the increased neutral density in front of the probe surface,
-%	The plasma at the TS position requires more neutral density to see the drop off in plasma density take effect, resulting in the rollover of density at a higher value of target chamber neutral pressure.
-%	\begin{figure}[!tb]
-%		\center{
-%			\vspace{-20pt}
-%			\includegraphics[width=.8\linewidth]{CollabReport/densityScan_jsatQpar_TS.png}
-%		}
-%		\vspace{-0pt}
-%		\caption{
-%			Graph of $J_{sat}$ \textit{(upper)} and $q_{\parallel}$ \textit{(lower)} calculated from probe measurements and TS data as a function of gas puffing speed. 
-%%			Delayed onset in reduction of $J_{sat}$ supports previous measurements in suggesting the existence of a moving detachment front.
-%			%			Good agreement between the reduced heat flux at higher gas puff rates, suggests a saturation of the heat mitigation effect of higher neutral density.
-%		}
-%		\label{fig:densityScan_jq}
-%		\vspace{-15pt}
-%	\end{figure}
-% 	The $J_{sat}$ and $q_{\parallel}$ profiles \cref{fig:densityScan_jq} show a continuous decline as neutral density increases, as would be expected due to the plasma-neutral collisions reducing the energy of plasma particles before they reach the probes.
-% 	This could be considered an indicator of detachment and, if so, would be accompanied by an increase in radiation from the plasma in front of the probes. 
-% 	This could be verified in further experiments.
-% 	The delayed onset in the reduction of $J_{sat}$ in the TS measurements (i.e. further along the beam) may suggest the area of increased collisions is moving up the beam.
-% 	Agreement can be seen between the probe and TS measurements of $q_{\parallel}$ at higher levels of gas puffing, however this is likely due to the overestimation of $T_e$ and underestimation of $n_e$ combining fortuitously.
-%	This agreement also suggests that the high temperatures measured by the probes are physical and reduced to the normal levels by the decrease in heat flux due to neutral gas puffing.
-	%	The values of heat flux are slightly higher than expected, as one would expect to find o, suggesting that the overestimation of temperatures is not a physical phenomenon but an issue with the interpretation of the IV curves.
-	
-% 	IR camera data is still pending thorough analysis, but could be used to verify the heat flux measurements.
+	More analysis is currently underway pending reevaluation of the voltage and current calibration. 
 
 %------------------------------------------------------------------------------------
 %	Langmuir Probes
@@ -512,12 +483,12 @@ The updated model can then be applied to the interpretation of flush mounted Lan
     This is a recognised bug, but as the support team for Spice-2 is small, and I am the only user who needs this feature to work, the resolution has yet to be found or implemented.
     This is however ongoing and a workaround has been found which allows new simulations to be joined together and now allows longer simulations involving probes to be effectively analysed. 
     
-    A new python package has also been created to assist in the submission of multiple 24 hour Spice-2 simulations.
-    This package can automatically submit jobs on a cluster with batch job submission and have them automatically restart until a certain time limit is met. 
-    This package can also submit parameter scans, i.e. it can read an input file with $n$ values for a particular parameter and submit $m$ jobs for each parameter, where m is the required number of restarts.
-    There is also automatic logging functionality to keep track of the simulations submitted along with their parameters and machine/job information. 
-    This package is currently only functional for Spice-2 and Spice-3, but has been written to be code agnostic and work is underway to make it a general, open-source tool. 
-    More details can be found on the \hyperlink{https://github.com/jackleland/autospice/tree/development}{github}.
+    % A new python package has also been created to assist in the submission of multiple 24 hour Spice-2 simulations.
+    % This package can automatically submit jobs on a cluster with batch job submission and have them automatically restart until a certain time limit is met. 
+    % This package can also submit parameter scans, i.e. it can read an input file with $n$ values for a particular parameter and submit $m$ jobs for each parameter, where m is the required number of restarts.
+    % There is also automatic logging functionality to keep track of the simulations submitted along with their parameters and machine/job information. 
+    % This package is currently only functional for Spice-2 and Spice-3, but has been written to be code agnostic and work is underway to make it a general, open-source tool. 
+    % More details can be found on the \hyperlink{https://github.com/jackleland/autospice/tree/development}{github}.
 	
 \subsection{\label{subsec:mastu_probe_design} Progression of MAST-U Probe Design}
 	Due to the limitations on running simulations of probes, only lower density simulations could be performed as density is the main scaling factor for the length of a Spice simulation.
@@ -532,8 +503,8 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 	The results of this angle scan and the effect of the $T_e$ and $n_e$ measurements for each of the simulated probes can be seen in figure \ref{fig:sim-incidence-angle}.
 	\begin{figure}[!tb]
 		\center{
-			\vspace{-20pt}
-			\includegraphics[width=.8\linewidth]{simulation-incidence_angle.png}
+% 			\vspace{-20pt}
+			\includegraphics[width=1.0\linewidth]{simulation-incidence_angle.png}
 		}
 		\vspace{-0pt}
 		\caption{
@@ -541,7 +512,7 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 			In the flush case the measured temperatures are less accurate at shallower incidence angles, which is remedied somewhat by the angled probe.
 			}
 		\label{fig:sim-incidence-angle}
-		\vspace{-15pt}
+		\vspace{-10pt}
 	\end{figure}
 	
 	The simulations appear to show that for the flush case, there is an increased overestimation of $T_e$ as the $\alpha$ approaches 0$^{\circ}$, which is remedied somewhat by angling the probe tip 10$^{\circ}$ relative to the tile. 
@@ -549,50 +520,36 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 	There also appears to be a systematic overestimation of temperature around the 15$^{\circ}$ point using an angled probe compared to a flush probe. 
 	The results on the effect of recessing the probe relative to the fore-tile and the recessing of the rear-tile are in the final stages of being analysed, but these are not expected to deviate greatly from the simple angled case.
 	
-    These simulations will form the basis for simulations of the MAST-U and DSF probes going forward into higher densities and eventually 3D tip geometries. 
+    These simulations will form the basis for simulations of the MAST-U and DSF probes going forward into higher densities and dimensionality. 
 
 %------------------------------------------------------------------------------------
 %	PhD Project Plan
 %------------------------------------------------------------------------------------
 
-\section{\label{sec:phd}Future Work \& Plan}
-
-%\subsection{\label{subsec:simulations}Return to Magnum-PSI}
-	The work carried out on Magnum-PSI, while fruitful, is incomplete.
-	A further experiment has therefore been requested to complete the following goals: (a) carry out the investigation of incidence angle dependence on probe measurements, and (b) test the new design of the DSF probe head to ensure the previously uncovered problems have been remedied.
-	For this investigation a week of beam time has been requested and the experiment will be carried out in collaboration with another PhD student at CCFE hoping to test the efficacy of a new diagnostic: coherence imaging spectroscopy.
-	This will provide measurements of temperature and density to have a further diagnostic to compare probe measurements to. 
-	It has also been requested that the electronics used in the previous experiment be re-used to minimise the introduction of additional noise or interference effects.
-
-%\subsection{\label{subsec:experiments}JET Simulations}
-%It has also been suggested that the justification for the
-	Verification, with detailed simulation on SPICE, of the 4-parameter fit used in the fitting of FMP data on the Joint European Torus (JET) at CCFE is also planned for next year.
-%	The model is used on all data regardless of magnetic incidence angle and verification as to whether the modified 4-parameter fit \cite{Gunn1995} would be useful for future probe analysis; both for JET and for MAST-U, as the angled probe tip design was based on the probes at JET.  
-	This work will take the form of simulating JET probe tips under a variety of JET relevant conditions - most likely from looking at plasma parameters from high quality JET LP shots - and then comparing the simulation results to the IV characteristics in the JET database. 
-	This will establish whether it was valid to use the 4-parameter fit in all previous JET data and advise on whether to continue using it, or alternatively the simplified 3-parameter fit, on upcoming campaigns.
-%	The shots will be chosen based on how applicable the 4-parameter fit appears to be for that shot, with a range of highly suitable and unsuitable shots chosen.
-%	This will hopefully give a good idea of whether the 4-parameter fit is (a) computationally reproducible, and (b) of limited use in certain areas of parameter space.
-
-%\subsection{\label{subsec:}Conferences}
-
-%\subsection{\label{subsec:timeline}Timeline for Remainder of PhD}
-
-	The overall plan for the remaining 2 years of research, i.e. Dec 2018 - Sep 2020, has been drafted in \cref{fig:timeline}.
+\section{\label{sec:phd}Future Work \& Thesis Plan}
+    The major experiment of the PhD has been completed this year and the results from this experiment will form the basis of two chapters in the thesis. 
+    Unfortunately, due to the MAST-U timeline being pushed back and the start date of the physics campaign moving to May 2020, it is unclear whether MAST-U can be relied upon for providing data for comparison with MAST-U relevant simulations. 
+    The computational work in the thesis will therefore consist of simulations for MAST-U probes and the DSF probes and focus on the improvement of the FMP model; MAST-U data comparison is therefore desired but optional. 
+    
+	The overall plan for the remaining 9 months of research, i.e. Dec 2019 - Sep 2020, has been drafted in \cref{fig:timeline}.
 	\begin{figure}[t]
 		\center{
 			\vspace{-15pt}
-			\includegraphics[width=0.8\linewidth]{PRYear2/plan3.png}
+			\includegraphics[width=0.8\linewidth]{phd_plan_2020.png}
 		}
 		\vspace{-0pt}
-		\caption{A Gantt chart denoting breakdown of proposed work and milestones to achieve. Squares marked A denote the submission deadline for the respective conference abstract.}
+		\caption{A Gantt chart denoting breakdown of proposed work and milestones to achieve. The Magnum-PSI analysis needs to be finalised before attending the PSI conference in Jeju 2020. Squares marked A denote the submission deadline for the respective conference abstract.}
 		\label{fig:timeline} 
 	\end{figure}
 	This is not finalised but is intended to give an overall impression of the desired work and how long it will take. 
-%	Three papers are intended to be published on the three overall areas of the PhD project: MAST-U LPs, JET LPs and Magnum-PSI measurements. 
+	It primarily focuses on finalising the analysis of Magnum-PSI probe data and comparing this to simulations of the DSF probe head. 
+	Focus will also be maintained on the simulation of MAST-U Langmuir probes in MAST-U relevant plasmas and the extension of the Langmuir probe model to 3 dimensions. 
+	
 	Two conferences are currently planned to be attended: plasma surface interactions (PSI) and the IoP plasma physics conference in 2020.
 	I plan to present a poster at PSI, and as part of the conference I will utilise the opportunity to submit a paper for publication in the conference proceedings journal.
 	Other conferences will be considered, such as the EPS conference in Europe, depending on available budget and time.
-%	This will use the majority of my remaining conference budget, with further small conferences possibly to be attended if ad-hoc funding can be found. 
+	It is intended for papers to be published with the data taken at Magnum-PSI, but completing the work for the thesis will take priority. 
+
 
 
 %----------------------------------------------------------------------------------------
