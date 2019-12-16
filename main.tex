@@ -17,10 +17,10 @@
 % Included by Jack
 \usepackage[
 %width=16cm, 
-left=1.5cm,
-right=1.5cm,
-top=2.5cm, 
-bottom=2.5cm
+left=1.48cm,
+right=1.48cm,
+top=2.45cm, 
+bottom=2.45cm
 ]{geometry}
 \usepackage{hyperref}
 \usepackage{float}
@@ -224,11 +224,11 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 	\frac{I}{I_{i,sat}} =  1 + a |V|^{\frac{3}{4}} - \exp\left({-V}\right) \qquad \textnormal{with} \qquad  V = \bigg(\frac{e(V_p - V_f)}{k_B T_e}\bigg)
 	\end{equation}
 	where $I$ is the measured current, $I_{i,sat}$ is the ion saturation current, $V_p$ and $V_f$ are the probe and floating potentials respectively, $e$ is the charge on an electron and $k_B$ is the Boltzmann constant. 
-	Bergmann's, and later Murphy-Sugrue's \cite{Murphy-Sugrue2017}, contribution to this equation is the addition of a sheath expansion term, $a$, which takes into account the incidence angle of the magnetic field $\theta$. 
+	Bergmann's, and later Murphy-Sugrue's \cite{Murphy-Sugrue2017}, contribution to this equation is the addition of a sheath expansion term, $a$, which takes into account the incidence angle of the magnetic field $\theta_{\perp}$. 
 	It is of the form
 	\begin{equation}
 	\label{eq:sheathexpparam}
-	a =  \frac{c_1 + c_2  \cot{(\alpha)}}{\sin^{\frac{1}{2}}{(\alpha})} \frac{\lambda_D}{L + g}
+	a =  \frac{c_1 + c_2  \cot{(\theta_{\perp})}}{\sin^{\frac{1}{2}}{(\theta_{\perp}})} \frac{\lambda_D}{L + g}
 	\end{equation}
 	where $c_1$ and $c_2$ are coefficients of the lateral and frontal expansion of the sheath respectively, $\lambda_D$ is the Debye length of the plasma, $L$ is the length of the probe and $g$ is the size of the gaps either side of the probe.
 	
@@ -393,7 +393,7 @@ The updated model can then be applied to the interpretation of flush mounted Lan
     The IV characteristics themselves were sweep-averaged over the course of a `shot', which was taken to be the point between the raising and lowering of the beam dump where the probes were exposed to steady state plasma. 
     Arcing was rare, but any instances of sharp increase in current or voltage were assumed to be an arc and filtered out. 
 	
-	IV characteristics were analysed using the 3-stage method developed on MAST \cref{fig:threeStageFit}, with a full 4-parameter model used throughout (\cref{eq:ivcurvesheathexp}) - parameters being $T_e$, $I_{sat}$, $V_f$ and $a$.
+	IV characteristics were analysed using the 3-stage method developed on MAST, with a full 4-parameter model used throughout (\cref{eq:ivcurvesheathexp}) - parameters being $T_e$, $I_{sat}$, $V_f$ and $a$.
 	The ion saturation region of the IV curve is fit first to get an initial value for ion saturation current.
 	This initial value of $I_{sat}$ is then kept fixed in a second, 4-parameter fit to the whole IV curve. 
 	Finally, a full, freely varying 4-parameter fit is carried out, with initial values taken from the second fit, to get final parameter values and uncertainties.
@@ -416,21 +416,23 @@ The updated model can then be applied to the interpretation of flush mounted Lan
     	\label{eq:d}
     	d = \frac{d_{\perp} - d_{\phi}\tan{\theta_{\perp}}}{ \sin{\theta_{p}} + \tan{\theta_{\perp}}\cos{\theta_{p}}}
 	\end{equation}
-	Whereas for probe R - the flush cylindrical probe - this is given by:
+	where $\theta_{\perp}$ is the incidence angle of the magnetic field relative to the tile plane, $\theta_{p}$ is the angle of the probe tip relative to the tile plane and $\theta_{f}$ is the 'flow angle' which is the angle of the right-trapezoid of the probe tip.
+	For probe R - the flush cylindrical probe - this is given by:
 	\begin{equation}
         \label{eq:cylinder_A_coll}
         A_{eff} = \bigg(\pi - \theta_{c} - \frac{1}{2}\sin{2\theta_{c}}\bigg) r^2\sin{\theta_{\perp}}
     \end{equation}
+	where $\theta_{c}$ is half the angle of the shadowed chord of the circular probe cross-section.
 	$c_s$ is calculated from $c_s = \sqrt{\frac{e(T_e + T_i)}{m_i}}$ and $T_e = T_i$ assumed. 
 	
 	The data set gathered is large, so the initial focus of analysis was on ensuring the calibration of the probes was done correctly using the improved characterisation and calibration shots on resistors of known resistance. 
-	The first set of shots to be analysed was the axial scan - a series of measurements taken with the S and L probes at different positions on the beam relative to the fixed position of the TS laser. 
+	The first set of shots to be analysed was the axial scan - a series of measurements taken with the S and L probes at different positions along the beam relative to the fixed position of the TS laser. 
 	These were all taken at an incidence angle of 10$^{\circ}$, with source input parameters (source current and gas flow) kept constant throughout. 
 	As the axial position scan necessitated moving the probe head, mount and TEAC arm through the TS laser position, only a single reference TS measurement was taken to which all probe measurements were compared (see \cref{fig:mag-axial-scan})
 	\begin{figure}[!tb]
 		\center{
 % 			\vspace{-20pt}
-			\includegraphics[width=1.0\linewidth]{axial_scan_2.png}
+			\includegraphics[width=0.8\linewidth]{axial_scan_2.png}
 		}
 		\vspace{-20pt}
 		\caption{
@@ -450,10 +452,12 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 	It should also be noted that the temperature, as measured by the TS system, is still under 5eV and so not ideal for measurement with LPs.
 	The density underestimation, by a factor of up to $\sim$6, has no clear explanation. 
 	It could be due: to an error in the calculation of the probe's collection area; an incorrect assumption of ion-electron temperature equivalence in the calculation of the sound speed, although Collective TS measurements taken recently on Magnum-PSI indicate this is unlikely; or, as for the temperature, some unaccounted for physics or incorrect calibration.
-	The jump in density at linear position 25mm is likely a sudden change in plasma parameters caused by some physical change within the source - it is unfortunately impossible to verify this however due to the necessary absence of TS coverage throughout the scan.
+	The voltage and current calibration will be reevaluated following these findings.
+	The jump in density seen at linear position 25mm is likely a sudden change in plasma parameters caused by some physical change within the source - it is unfortunately impossible to verify this however due to the necessary absence of TS coverage throughout the scan. 
 	
-	More analysis is currently underway pending reevaluation of the voltage and current calibration. 
-
+	Further analysis of different shots is currently underway. 
+	There has been a twofold approach in separating the shots, with half being magnetics scans (i.e. magnetic field incidence scans, magnetic field strength scans) and half looking at species effects (i.e. different species plasmas, neutral puffing etc.).
+	
 %------------------------------------------------------------------------------------
 %	Langmuir Probes
 %------------------------------------------------------------------------------------
@@ -468,43 +472,43 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 	Current is measured as the voltage is swept, allowing an IV characteristic to be extracted.
 	This IV characteristic can then be fit with \cref{eq:ivcurvesheathexp}, performed using the non-linear least squares fitting function curve\_fit() (part of the optimise package in numpy).
 	The parameters extracted by this fit ($T_e, n_e, a, I_{i, sat}$) represent the plasma parameters measured by a perfectly conducting probe with no capacitance effects. 
-	Note that this analysis has been generalised (\hyperlink{https://github.com/jackleland/flopter}{see github}) and was also applied to the data from experimental probes in \cref{sec:mag}.
+	Note that this analysis has been generalised \cite{LelandGithub} and was also applied to the data from experimental probes in \cref{sec:mag}.
 
 \subsection{\label{ssec:marconi}Move to Marconi and 24-hour Time Limits}
     Following the benchmarking period on CUMULUS in 2018, time was applied for in the 2019-2020 allocation on Marconi. 
-    This application was successful, with $\sim10^{7}$ core-hours allocated, so work was started in January of 2019 to get Spice-2 simulations working on Marconi.
-    This was unfortunately dogged by months of hardware problems on Marconi and then issues with running Spice-2 in the 24 hour time limit imposed by Marconi.
+    This application was successful, with $\sim10^{7}$ core-hours allocated, so work was started in January of 2019 to get SPICE-2 simulations working on Marconi.
+    This was unfortunately dogged by months of hardware problems on Marconi and then issues with running SPICE-2 in the 24 hour time limit imposed by Marconi.
     
-    This 24 hour time limit is in place to encourage high parallelisability of code, but Spice-2 is unfortunately limited by its solver which, while recently parallelised, offers limited scalability - peaking at around 100 cores.
+    This 24 hour time limit is in place to encourage high parallelisability of code, but SPICE-2 is unfortunately limited by its solver which, while recently parallelised, offers only limited scalability - peaking at around 100 cores.
     % The code is also very memory intensive, which is the main bottleneck.
-    This means that most Spice-2 simulations, dependent principally on density and the incidence angle of the magnetic field, will take over 24 hours, and often many times more than this. 
+    This means that most SPICE-2 simulations, dependent principally on density and the incidence angle of the magnetic field, will take over 24 hours, and often many times more than this. 
     Therefore the simulations must be continually restarted in order finish when using on Marconi. 
-    Unfortunately the current version of Spice-2 is unable to effectively restart while maintaining a measure of the current to a simulated probe. 
-    This is a recognised bug, but as the support team for Spice-2 is small, and I am the only user who needs this feature to work, the resolution has yet to be found or implemented.
+    Unfortunately the current version of SPICE-2 is unable to effectively restart while maintaining a measure of the current to a simulated probe. 
+    This is a recognised bug, but as the support team for SPICE-2 is small, and I am the only user who needs this feature to work, the resolution has yet to be found or implemented.
     This is however ongoing and a workaround has been found which allows new simulations to be joined together and now allows longer simulations involving probes to be effectively analysed. 
     
-    % A new python package has also been created to assist in the submission of multiple 24 hour Spice-2 simulations.
+    % A new python package has also been created to assist in the submission of multiple 24 hour SPICE-2 simulations.
     % This package can automatically submit jobs on a cluster with batch job submission and have them automatically restart until a certain time limit is met. 
     % This package can also submit parameter scans, i.e. it can read an input file with $n$ values for a particular parameter and submit $m$ jobs for each parameter, where m is the required number of restarts.
     % There is also automatic logging functionality to keep track of the simulations submitted along with their parameters and machine/job information. 
-    % This package is currently only functional for Spice-2 and Spice-3, but has been written to be code agnostic and work is underway to make it a general, open-source tool. 
+    % This package is currently only functional for SPICE-2 and SPICE-3, but has been written to be code agnostic and work is underway to make it a general, open-source tool. 
     % More details can be found on the \hyperlink{https://github.com/jackleland/autospice/tree/development}{github}.
 	
 \subsection{\label{subsec:mastu_probe_design} Progression of MAST-U Probe Design}
-	Due to the limitations on running simulations of probes, only lower density simulations could be performed as density is the main scaling factor for the length of a Spice simulation.
-	Lowering density to $1 \times 10^{18} \; m^{-3}$ for a simulation with an incidence angle of $10^{\circ}$ resulted in a $\sim$ completion time of 10 hours.
+	Due to the limitations on running simulations of probes, only lower density simulations could be performed as density is the main scaling factor for the length of a SPICE simulation.
+	Lowering density to $1 \times 10^{18} \; m^{-3}$ for a simulation with an incidence angle of $10^{\circ}$ resulted in a completion time of $\sim$10 hours.
 	The completion time would be larger for lower angles of magnetic field incidence angle, as the length of the simulation scales with $\frac{1}{\sin{\theta}}$. 
 	
 	A study of the individual aspects of the probe design from MAST-U was carried out in 2 dimensions, using lower density simulations. 
 	The difference between the previously run benchmarking simulations of Murphy-Sugrue, which consisted of a flush probe with no shadowing of the leading edge, and the desired simulations of the MAST-U standard probe tip, were summarised with the following features: (a) an angled tip, angled 10$^{\circ}$ to the tile, (b) a recessed probe body which allowed for shadowing of the leading edge of the probe, and (c) a recessed rear tile, set 1mm down from the fore-tile.  
-	Thus 4 different probe tip geometries were simulated at a range of angles between 1$^{\circ}$ and 90$^{\circ}$, to see the effect that each of the features had on the measurement of the temperature and density at different angles of magnetic field incidence ($\alpha$).
-	The plasma parameters used were: $T_e$ = 5eV, $n_e$ = $1 \times 10^{18} \; m^{-3}$, $B$ = 0.5T and $\alpha$ as specified above. 
+	Thus 4 different probe tip geometries were simulated at a range of angles between 1$^{\circ}$ and 90$^{\circ}$, to see the effect that each of the features had on the measurement of the temperature and density at different angles of magnetic field incidence ($\theta_{\perp}$).
+	The plasma parameters used were: $T_e$ = 5eV, $n_e$ = $1 \times 10^{18} \; m^{-3}$, $B$ = 0.5T and $\theta_{\perp}$ as specified above. 
 	A fifth tip geometry, that of the S probe from the DSF, was also simulated. 
 	The results of this angle scan and the effect of the $T_e$ and $n_e$ measurements for each of the simulated probes can be seen in figure \ref{fig:sim-incidence-angle}.
 	\begin{figure}[!tb]
 		\center{
 % 			\vspace{-20pt}
-			\includegraphics[width=1.0\linewidth]{simulation-incidence_angle.png}
+			\includegraphics[width=0.9\linewidth]{simulation-incidence_angle.png}
 		}
 		\vspace{-0pt}
 		\caption{
@@ -515,7 +519,7 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 		\vspace{-10pt}
 	\end{figure}
 	
-	The simulations appear to show that for the flush case, there is an increased overestimation of $T_e$ as the $\alpha$ approaches 0$^{\circ}$, which is remedied somewhat by angling the probe tip 10$^{\circ}$ relative to the tile. 
+	The simulations appear to show that for the flush case, there is an increased overestimation of $T_e$ as the $\theta_{\perp}$ approaches 0$^{\circ}$, which is remedied somewhat by angling the probe tip 10$^{\circ}$ relative to the tile. 
 	This effect appears to work at grazing angles of incidence, but not at the very oblique angles of incidence.
 	There also appears to be a systematic overestimation of temperature around the 15$^{\circ}$ point using an angled probe compared to a flush probe. 
 	The results on the effect of recessing the probe relative to the fore-tile and the recessing of the rear-tile are in the final stages of being analysed, but these are not expected to deviate greatly from the simple angled case.
@@ -529,13 +533,13 @@ The updated model can then be applied to the interpretation of flush mounted Lan
 \section{\label{sec:phd}Future Work \& Thesis Plan}
     The major experiment of the PhD has been completed this year and the results from this experiment will form the basis of two chapters in the thesis. 
     Unfortunately, due to the MAST-U timeline being pushed back and the start date of the physics campaign moving to May 2020, it is unclear whether MAST-U can be relied upon for providing data for comparison with MAST-U relevant simulations. 
-    The computational work in the thesis will therefore consist of simulations for MAST-U probes and the DSF probes and focus on the improvement of the FMP model; MAST-U data comparison is therefore desired but optional. 
+    The computational work in the thesis will therefore consist of simulations for MAST-U probes and the DSF probes and focus on the improvement of the FMP model. 
     
 	The overall plan for the remaining 9 months of research, i.e. Dec 2019 - Sep 2020, has been drafted in \cref{fig:timeline}.
 	\begin{figure}[t]
 		\center{
 			\vspace{-15pt}
-			\includegraphics[width=0.8\linewidth]{phd_plan_2020.png}
+			\includegraphics[width=0.6\linewidth]{phd_plan_2020.png}
 		}
 		\vspace{-0pt}
 		\caption{A Gantt chart denoting breakdown of proposed work and milestones to achieve. The Magnum-PSI analysis needs to be finalised before attending the PSI conference in Jeju 2020. Squares marked A denote the submission deadline for the respective conference abstract.}
